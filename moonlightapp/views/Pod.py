@@ -13,6 +13,7 @@ class PodList(APIView):
     def get(self, request, format=None):
         pods = PodModel.objects.all()
         serializer = PodSerializer(pods, many=True)
+
         return Response(serializer.data)
 
     def post(self, request, format=None):
@@ -21,3 +22,21 @@ class PodList(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+
+class PodDetail(APIView):
+    """
+       Retrieve, update or delete a snippet instance.
+       """
+
+    def get_object(self, pk):
+        try:
+            return PodModel.objects.get(pk=pk)
+        except PodModel.DoesNotExist:
+            raise Http404
+
+    def get(self, request, pk=None, format=None):
+        pod = self.get_object(pk)
+        serializer = PodSerializer(pod)
+        return Response(serializer.data)
