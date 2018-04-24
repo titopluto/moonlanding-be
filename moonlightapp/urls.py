@@ -9,8 +9,8 @@ urlpatterns = [
     url(r'^pods$', PodList.as_view()),
     url(r'^pods/(?P<pk>[0-9]+)/$', PodDetail.as_view()),
     url(r'^documents$', DocumentList.as_view()),
-    url(r'^courses$', DocumentList.as_view()),
-    url(r'^courses/labs$', DocumentList.as_view()),
+    url(r'^courses$', CourseList.as_view()),
+    url(r'^courses/labs$', CouseLabList.as_view()),
 ]
 
 
