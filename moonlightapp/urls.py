@@ -10,7 +10,7 @@ urlpatterns = [
     url(r'^pods/(?P<pk>[0-9]+)/$', PodDetail.as_view()),
     url(r'^documents$', DocumentList.as_view()),
     url(r'^courses$', CourseList.as_view()),
-    url(r'^courses/labs$', CouseLabList.as_view()),
+    url(r'^courses/(?P<pk>[0-9]+)/labs$', CouseLabList.as_view()),
 ]
 
 
