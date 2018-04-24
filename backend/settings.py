@@ -129,3 +129,5 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
+
+ALLOWED_HOSTS = ['129.173.143.240', 'localhost', '127.0.0.1']
