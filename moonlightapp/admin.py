@@ -1,9 +1,21 @@
 from django.contrib import admin
-from moonlightapp.models.usermodel import User
-from moonlightapp.models.Pod import Pod, PodDevices
+
+
+from moonlightapp.models.Pod import Pod
+from moonlightapp.models.PodDevice import PodDevice
 from moonlightapp.models.Device import Device
 
-admin.site.register(User)
+from moonlightapp.models.Document import Document
+
+from moonlightapp.models.Course import Course
+from moonlightapp.models.Lab import Lab
+
+
 admin.site.register(Pod)
 admin.site.register(Device)
-admin.site.register(PodDevices)
+admin.site.register(PodDevice)
+
+admin.site.register(Document)
+
+admin.site.register(Course)
+admin.site.register(Lab)
