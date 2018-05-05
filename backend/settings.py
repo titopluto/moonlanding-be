@@ -37,10 +37,15 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'guardian',
     'corsheaders',
     'moonlightapp',
 ]
 
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend', # this is default
+    'guardian.backends.ObjectPermissionBackend',
+)
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -56,7 +61,7 @@ MIDDLEWARE = [
 CORS_ORIGIN_WHITELIST = (
     'google.com',
     'hostname.example.com',
-    'localhost:8000',
+    'localhost:3000',
     '127.0.0.1:9000'
 )
 
