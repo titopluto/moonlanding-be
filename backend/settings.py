@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'corsheaders',
-    'moonlightapp',
+    'core',
+    'moonlightapp'
 ]
 
 
@@ -138,5 +139,19 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    # 'DEFAULT_AUTHENTICATION_CLASSES': (
+    #     'moonlightapp.CustomAuthentication.ExampleAuthentication',
+    # )
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+    #         'rest_framework.authentication.BasicAuthentication',
+    #         'rest_framework.authentication.SessionAuthentication',
+    'core.auth.authentication.JWTAuthentication',
+    )
+}
 
 ALLOWED_HOSTS = ['129.173.143.240', 'localhost', '127.0.0.1']
