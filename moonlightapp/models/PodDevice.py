@@ -8,4 +8,4 @@ class PodDevice(models.Model):
     dev_url = models.CharField(max_length=500)
 
     def __str__(self):
-        return self.dev_url
+        return self.pod.name + " - " + self.device.name + " - " + self.dev_url
