@@ -46,10 +46,10 @@ class PodDetail(APIView):
             raise Http404
 
     def get_pod_device(self, pk):
-        try:
+        # try:
             return PodDeviceModel.objects.filter(pod=pk)
-        except PodDeviceModel.DoesNotExist:
-            raise Http404
+        # except PodDeviceModel.DoesNotExist:
+        #     raise Http404
 
     def get(self, request, pk=None, format=None):
         print(pk)
@@ -63,6 +63,7 @@ class PodDetail(APIView):
         for i in self.get_pod_device(pod):
             i.delete()
         for dev in request.data["devices"]:
+            print(type(dev["device"]["id"]))
             devv = self.get_device(dev["device"]["id"])
             PodDeviceModel(device = devv, pod = pod, dev_url = dev["dev_url"]).save()
 
