@@ -4,6 +4,8 @@ from rest_framework.response import Response
 from rest_framework import status
 
 from moonlightapp.models.Pod import Pod as PodModel
+from moonlightapp.models.Device import Device as DeviceModel
+from moonlightapp.models.PodDevice import PodDevice as PodDeviceModel
 from moonlightapp.serializers.Pod import PodList as PodListSerializer
 from moonlightapp.serializers.Pod import PodDetail as PodDetailSerializer
 
@@ -37,8 +39,31 @@ class PodDetail(APIView):
         except PodModel.DoesNotExist:
             raise Http404
 
+    def get_device(self, pk):
+        try:
+            return DeviceModel.objects.get(pk=pk)
+        except DeviceModel.DoesNotExist:
+            raise Http404
+
+    def get_pod_device(self, pk):
+        try:
+            return PodDeviceModel.objects.filter(pod=pk)
+        except PodDeviceModel.DoesNotExist:
+            raise Http404
+
     def get(self, request, pk=None, format=None):
         print(pk)
         pod = self.get_object(pk)
         serializer = PodDetailSerializer(pod)
         return Response(serializer.data)
+
+    def post(self, request, pk=None, format=None):
+        pod = self.get_object(pk)
+        print(request.data)
+        for i in self.get_pod_device(pod):
+            i.delete()
+        for dev in request.data["devices"]:
+            devv = self.get_device(dev["device"]["id"])
+            PodDeviceModel(device = devv, pod = pod, dev_url = dev["dev_url"]).save()
+
+        return self.get(request, pk)
