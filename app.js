@@ -9,9 +9,9 @@ var startServer = function (app) {
 	console.log("server started" + PORT);
 };
 
+app.use(cors());
 app.use("/", express.static('./content'));
 
-app.use(cors());
 
 
 startServer(app);
