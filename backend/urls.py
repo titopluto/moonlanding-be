@@ -25,7 +25,4 @@ urlpatterns = [
     url(r'^docs/', include_docs_urls(title="""Moonlight API's""")),
     path('admin/', admin.site.urls),
     url(r'^api/', include('moonlightapp.urls')),
-] + static(settings.STATIC_URL, document_root=settings.MEDIA_ROOT)
-
-
-print(urlpatterns)
+] #+ static(settings.STATIC_URL, document_root=settings.MEDIA_ROOT)
