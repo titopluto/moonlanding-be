@@ -8,7 +8,7 @@ class Device(serializers.ModelSerializer):
 
     class Meta:
         model = DeviceModel
-        fields = ('id', 'name')
+        fields = ('id', 'name', 'description', 'type')
 
 class PodDevice(serializers.ModelSerializer):
     device = Device()
