@@ -20,9 +20,16 @@ from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework.documentation import include_docs_urls
+from core.auth.views import TokenObtainPairView
 
 urlpatterns = [
     url(r'^docs/', include_docs_urls(title="""Moonlight API's""")),
     path('admin/', admin.site.urls),
-    url(r'^api/', include('moonlightapp.urls')),
-] #+ static(settings.STATIC_URL, document_root=settings.MEDIA_ROOT)
+
+    url(r'^api/token/$', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+
+    #url(r'^api/token/refresh/$', TokenRefreshView.as_view(), name='token_refresh'),
+    #url(r'^api/token/verify/$', TokenVerifyView.as_view(), name='token_verify'),
+
+    url(r'^api/', include('moonlightapp.urls'))
+]
