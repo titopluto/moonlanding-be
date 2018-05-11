@@ -7,7 +7,11 @@ from django.conf import settings
 from django.utils import six
 from django.utils.functional import lazy
 from django.utils.timezone import is_naive, make_aware, utc
+from django.contrib.auth.models import User
 
+def token_decode(token):
+    user = User(id = 13, username = "username", email = "email")
+    return user
 
 def make_utc(dt):
     if settings.USE_TZ and is_naive(dt):

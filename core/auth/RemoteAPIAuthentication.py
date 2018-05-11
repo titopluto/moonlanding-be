@@ -2,19 +2,17 @@ import requests
 import json
 import django.contrib.auth as auth
 import django.contrib.auth.signals as signals
-from django.contrib.auth.models import User
+from .utils import token_decode
 
 headers = {'content-type': 'application/json'}
 
 AUTH_API = "http://access.inwk.dal.ca/api/api-token-auth/"
 TOKEN_VERIFY = "http://access.inwk.dal.ca/api/api-token-verify/"
 
-def token_decode(token):
-    user = User(id = 13, username = "username", email = "email")
-    return user
+
 
 def authenticate(request=None, **credentials):
-    print(credentials)
+    
     data = {}
     data["username"] = credentials["username"]
     data["password"] = credentials["password"]
