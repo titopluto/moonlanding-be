@@ -4,7 +4,7 @@ from moonlightapp.models.Course import Course
 def user_file_path(instance, filename):
     course_id = str(instance.course.id)
     name = instance.name.replace(" ", "_")
-    return course_id + "/" + name
+    return course_id + "/" + name + filename[-4:]
 
 class Lab(models.Model):
     course = models.ForeignKey(Course, related_name='lab', on_delete=models.CASCADE)

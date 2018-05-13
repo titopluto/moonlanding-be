@@ -1,7 +1,8 @@
 from django.db import models
 
 def user_file_path(instance, filename):
-    return instance.name + filename[-4:]
+    name = instance.name.replace(" ", "_")
+    return name + filename[-4:]
 
 class Document(models.Model):
     id = models.IntegerField(auto_created=True, primary_key=True)

@@ -10,6 +10,8 @@ from moonlightapp.models.Document import Document
 from moonlightapp.models.Course import Course
 from moonlightapp.models.Lab import Lab
 
+from moonlightapp.models.CarouselContent import CarouselContent
+
 
 admin.site.register(Pod)
 admin.site.register(Device)
@@ -19,3 +21,5 @@ admin.site.register(Document)
 
 admin.site.register(Course)
 admin.site.register(Lab)
+
+admin.site.register(CarouselContent)
