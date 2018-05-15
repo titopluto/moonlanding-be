@@ -1,6 +1,7 @@
 from django.http import Http404
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
 
 from moonlightapp.models.Pod import Pod as PodModel
@@ -10,6 +11,7 @@ from moonlightapp.serializers.Pod import PodList as PodListSerializer
 from moonlightapp.serializers.Pod import PodDetail as PodDetailSerializer
 
 class PodList(APIView):
+    permission_classes = (IsAuthenticated,)
     """
     List all Pods.
     """
@@ -29,6 +31,7 @@ class PodList(APIView):
 
 
 class PodDetail(APIView):
+    permission_classes = (IsAuthenticated,)
     """
        Retrieve Pod instance.
     """

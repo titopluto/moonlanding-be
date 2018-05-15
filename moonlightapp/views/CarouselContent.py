@@ -1,12 +1,14 @@
 from django.http import Http404
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
 
 from moonlightapp.models.CarouselContent import CarouselContent as CarouselContentModel
 from moonlightapp.serializers.CarouselContent import CarouselContentList as CarouselContentListSerializer
 
 class CarouselContentList(APIView):
+    permission_classes = (IsAuthenticated,)
     """
     List all Carousel Content.
     """
