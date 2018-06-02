@@ -155,3 +155,12 @@ REST_FRAMEWORK = {
 }
 
 ALLOWED_HOSTS = ['129.173.143.240', 'localhost', '127.0.0.1']
+
+
+AUTH_API = "http://access.inwk.dal.ca/api/api-token-auth/"
+TOKEN_VERIFY = "http://access.inwk.dal.ca/api/api-token-verify/"
+
+LDAP_URL = "ldap://129.173.143.172"
+LDAP_USER_DN = "cn=admin,dc=inwk,dc=dal,dc=ca"
+LDAP_USER_PASS = "MoonWorld!"
+

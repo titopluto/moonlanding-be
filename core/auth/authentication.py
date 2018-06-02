@@ -8,7 +8,7 @@ from .exceptions import AuthenticationFailed, InvalidToken, TokenError
 from .models import TokenUser
 from .settings import api_settings
 from .state import User
-from .utils import token_decode
+from .utils import token_decode, create_user_obj
 
 AUTH_HEADER_TYPES = api_settings.AUTH_HEADER_TYPES
 
@@ -108,7 +108,8 @@ class JWTAuthentication(authentication.BaseAuthentication):
             raise InvalidToken(_('Token contained no recognizable user identification'))
 
         try:
-            user = token_decode(validated_token)
+            user_name = validated_token[api_settings.USER_USERNAME_CLAIM]
+            user = create_user_obj(user_id, user_name)
         except User.DoesNotExist:
             raise AuthenticationFailed(_('User not found'), code='user_not_found')
 

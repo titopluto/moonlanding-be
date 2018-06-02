@@ -24,6 +24,7 @@ DEFAULTS = {
     'AUTH_HEADER_TYPES': ('Bearer',),
     'USER_ID_FIELD': 'id',
     'USER_ID_CLAIM': 'user_id',
+    'USER_USERNAME_CLAIM' : 'user_name',
 
     'AUTH_TOKEN_CLASSES': ('core.auth.tokens.AccessToken',),
     'TOKEN_TYPE_CLAIM': 'token_type',

@@ -60,14 +60,14 @@ class PodDetail(APIView):
         serializer = PodDetailSerializer(pod)
         return Response(serializer.data)
 
-    def post(self, request, pk=None, format=None):
-        pod = self.get_object(pk)
-        print(request.data)
-        for i in self.get_pod_device(pod):
-            i.delete()
-        for dev in request.data["devices"]:
-            print(type(dev["device"]["id"]))
-            devv = self.get_device(dev["device"]["id"])
-            PodDeviceModel(device = devv, pod = pod, dev_url = dev["dev_url"]).save()
-
-        return self.get(request, pk)
+    # def post(self, request, pk=None, format=None):
+    #     pod = self.get_object(pk)
+    #     print(request.data)
+    #     for i in self.get_pod_device(pod):
+    #         i.delete()
+    #     for dev in request.data["devices"]:
+    #         print(type(dev["device"]["id"]))
+    #         devv = self.get_device(dev["device"]["id"])
+    #         PodDeviceModel(device = devv, pod = pod, dev_url = dev["dev_url"]).save()
+    # 
+    #     return self.get(request, pk)

@@ -13,6 +13,10 @@ def token_decode(token):
     user = User(id = 13, username = "username", email = "email")
     return user
 
+def create_user_obj(id, email):
+    user = User(id=id, username = email, email = email)
+    return user
+
 def make_utc(dt):
     if settings.USE_TZ and is_naive(dt):
         return make_aware(dt, timezone=utc)
