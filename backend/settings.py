@@ -164,3 +164,9 @@ LDAP_URL = "ldap://129.173.143.172"
 LDAP_USER_DN = "cn=admin,dc=inwk,dc=dal,dc=ca"
 LDAP_USER_PASS = "MoonWorld!"
 
+SMTP_URL = "smtp.gmail.com"
+SMTP_PORT = 587
+EMAIL_ADMIN_USER = ""
+EMAIL_ADMIN_PASS = ""
+
+PASSWORD_RESET_UI_URL = ""

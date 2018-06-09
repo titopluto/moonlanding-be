@@ -280,6 +280,9 @@ class RefreshToken(BlacklistMixin, Token):
 
         return access
 
+class PasswordResetToken(BlacklistMixin, Token):
+    token_type = 'reset'
+    lifetime = api_settings.PASSWORD_RESET_LIFETIME
 
 class AccessToken(Token):
     token_type = 'access'

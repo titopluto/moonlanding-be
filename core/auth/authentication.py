@@ -102,6 +102,7 @@ class JWTAuthentication(authentication.BaseAuthentication):
         """
         Attempts to find and return a user using the given validated token.
         """
+
         try:
             user_id = validated_token[api_settings.USER_ID_CLAIM]
         except KeyError:
