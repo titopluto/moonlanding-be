@@ -16,6 +16,7 @@ from .EmailService import send_email
 class Password(APIView):
     permission_classes = (IsAuthenticated,)
     """
+    put:
     To update password.
     """
     serializer_class = PasswordSerializer
