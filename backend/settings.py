@@ -169,4 +169,4 @@ SMTP_PORT = 587
 EMAIL_ADMIN_USER = ""
 EMAIL_ADMIN_PASS = ""
 
-PASSWORD_RESET_UI_URL = ""
+PASSWORD_RESET_UI_URL = "http://localhost:3000/resetpassword/"
