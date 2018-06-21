@@ -1,0 +1,13 @@
+version: '3'
+services:
+  web:
+    build: .
+    restart: always
+    command:  bash -c "python manage.py runserver 0.0.0.0:3000"
+    ports:
+      - "3000"
+    volumes:
+      - content:/docker_moonlight/content
+
+volumes:
+  content:
