@@ -13,8 +13,8 @@ services:
 
   node:
     build: 
-        context: node
-        dockerfile: ./Dockerfile
+        context: .
+        dockerfile: ./node/Dockerfile
     restart: always
     command: bash -c "node app.js"
     ports:
