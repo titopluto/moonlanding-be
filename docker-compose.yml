@@ -4,7 +4,7 @@ services:
     build: .
     restart: always
     command:  
-      - bash -c "python manage.py runserver 0.0.0.0:8000"
+      - "bash -c \"python manage.py runserver 0.0.0.0:8000\"
       - " && node app.js"
     ports:
       - "8000:8000"
