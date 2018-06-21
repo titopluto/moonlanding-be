@@ -3,9 +3,12 @@ services:
   web:
     build: .
     restart: always
-    command:  bash -c "python manage.py runserver 0.0.0.0:3000"
+    command:  
+      - bash -c "python manage.py runserver 0.0.0.0:8000"
+      - " && node app.js"
     ports:
-      - "3000:3000"
+      - "8000:8000"
+      - "8001:8001"
     volumes:
       - content:/docker_moonlight/content
 
