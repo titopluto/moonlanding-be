@@ -4,7 +4,7 @@ FROM node:8
 WORKDIR /usr/src/app
 
 # Bundle app source
-COPY .node/ .
+COPY . .
 
 RUN npm install
 # If you are building your code for production
