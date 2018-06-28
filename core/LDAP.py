@@ -54,7 +54,7 @@ def get_user_dn(l, identifier):
         cn, detail = result[0]
         return cn, detail
     else:
-        return None
+        return None, None
 
 
 def get_email_from_identifier(user_identifier):
