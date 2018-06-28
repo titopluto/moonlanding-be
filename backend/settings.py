@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
+import config as CONFIG
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -154,19 +155,19 @@ REST_FRAMEWORK = {
     )
 }
 
-ALLOWED_HOSTS = ['129.173.143.240', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = CONFIG.ALLOWED_HOSTS
 
 
-AUTH_API = "http://access.inwk.dal.ca/api/api-token-auth/"
-TOKEN_VERIFY = "http://access.inwk.dal.ca/api/api-token-verify/"
+AUTH_API = CONFIG.AUTH_API
+TOKEN_VERIFY = CONFIG.TOKEN_VERIFY
 
-LDAP_URL = "ldap://129.173.143.172"
-LDAP_USER_DN = "cn=admin,dc=inwk,dc=dal,dc=ca"
-LDAP_USER_PASS = "MoonWorld!"
+LDAP_URL = CONFIG.LDAP_URL
+LDAP_USER_DN = CONFIG.LDAP_USER_DN
+LDAP_USER_PASS = CONFIG.LDAP_USER_PASS
 
-SMTP_URL = "smtp.gmail.com"
-SMTP_PORT = 587
-EMAIL_ADMIN_USER = ""
-EMAIL_ADMIN_PASS = ""
+SMTP_URL = CONFIG.SMTP_URL
+SMTP_PORT = CONFIG.SMTP_PORT
+EMAIL_ADMIN_USER = CONFIG.EMAIL_ADMIN_USER
+EMAIL_ADMIN_PASS = CONFIG.EMAIL_ADMIN_PASS
 
-PASSWORD_RESET_UI_URL = "http://localhost:3000/resetpassword/"
+PASSWORD_RESET_UI_URL = CONFIG.PASSWORD_RESET_UI_URL

@@ -2,6 +2,7 @@ from django.conf import settings
 import sys, ldap, ldapurl
 from .ResponseStatus import ResponseStatus
 import hashlib, base64, binascii
+import re
 
 LDAP_URL = settings.LDAP_URL
 LDAP_ROOT_USER_DN = settings.LDAP_USER_DN
@@ -11,7 +12,9 @@ LDAP_USER_SEARCH_BASE = "ou=users,dc=inwk,dc=dal,dc=ca"
 ldap.set_option(ldap.OPT_DEBUG_LEVEL,0)
 ldap.set_option(ldap.OPT_X_TLS_REQUIRE_CERT, ldap.OPT_X_TLS_NEVER)
 
-def changePassword(user_email, old_pass, new_pass):
+EMAIL_REGEX = re.compile("[^@]+@[^@]+\.[^@]+")
+
+def changePassword(user_identifier, old_pass, new_pass):
 
 
     lu = ldapurl.LDAPUrl(LDAP_URL)
@@ -22,7 +25,7 @@ def changePassword(user_email, old_pass, new_pass):
 
     l.simple_bind_s(LDAP_ROOT_USER_DN, LDAP_ROOT_USER_PASS)
 
-    user_dn = get_user_dn(l, user_email)
+    user_dn, detail = get_user_dn(l, user_identifier)
 
     if user_dn:
         try:
@@ -39,16 +42,36 @@ def changePassword(user_email, old_pass, new_pass):
 
     return res
 
-def get_user_dn(l, email):
+def get_user_dn(l, identifier):
 
-    result = l.search_s(LDAP_USER_SEARCH_BASE,ldap.SCOPE_ONELEVEL,'(mail={})'.format(email),['uid'])
+    search_attribute = "uid"
+    if EMAIL_REGEX.match(identifier):
+        search_attribute = "mail"
+
+    result = l.search_s(LDAP_USER_SEARCH_BASE,ldap.SCOPE_ONELEVEL,'({attribute}={value})'.format(attribute=search_attribute, value=identifier),['uid', 'mail'])
 
     if result and result[0]:
         cn, detail = result[0]
-        return cn
+        return cn, detail
     else:
         return None
 
+
+def get_email_from_identifier(user_identifier):
+    lu = ldapurl.LDAPUrl(LDAP_URL)
+
+    l = ldap.initialize(lu.initializeUrl())
+
+    l.protocol_version = ldap.VERSION3
+
+    l.simple_bind_s(LDAP_ROOT_USER_DN, LDAP_ROOT_USER_PASS)
+
+    user_dn, detail = get_user_dn(l, user_identifier)
+
+    if detail and "mail" in detail and detail["mail"]:
+        return detail["mail"][0].decode("utf-8")
+    else:
+        return None
 
 def reset_password(user_email, new_pass):
 
@@ -61,7 +84,7 @@ def reset_password(user_email, new_pass):
     l.set_option(ldap.OPT_X_TLS_DEMAND, True)
     l.simple_bind_s(LDAP_ROOT_USER_DN, LDAP_ROOT_USER_PASS)
 
-    user_dn = get_user_dn(l, user_email)
+    user_dn, detail = get_user_dn(l, user_email)
 
     if not user_dn:
         res = ResponseStatus(400, "NOUSERNAMEFOREMAIL", "No dn found for email")
@@ -75,8 +98,8 @@ def reset_password(user_email, new_pass):
         try:
             l.modify_s(user_dn, add_pass)
             res = ResponseStatus(200, "SUCCESS", "Password changed successfully")
-        except:
-            res = ResponseStatus(400, "WENTWRONG", "Something went wrong")
+        except Exception as e:
+            res = ResponseStatus(400, "WENTWRONG", e.args[0])
 
     l.unbind_s()
 

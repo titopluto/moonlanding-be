@@ -6,7 +6,7 @@ from rest_framework import status
 from random import randint
 
 from .PasswordSerializer import PasswordSerializer
-from .LDAP import changePassword, reset_password
+from .LDAP import changePassword, reset_password, get_email_from_identifier
 from .auth.tokens import RefreshToken, PasswordResetToken, Token
 from .auth.utils import create_user_obj
 from .ResponseStatus import ResponseStatus
@@ -35,10 +35,17 @@ class Password(APIView):
 class PasswordResetEmail(APIView):
 
     def post(self, request):
-        email = request.data["email"]
+        user_identifier = request.data["email"]
         id = randint(1, 100)
+        email = get_email_from_identifier(user_identifier)
+
+        if not email:
+            res_status = ResponseStatus(400, "FAILURE", "You have no registered email to reset your password, Contact an instructor")
+            return Response(res_status.__dict__, status=res_status.status_code)
+
         user = create_user_obj(id, email)
         token = str(PasswordResetToken.for_user(user))
+
         try:
             send_email(to=email, content=token)
             res_status = ResponseStatus(200, "SUCCESS", "Password Reset email has been sent")
