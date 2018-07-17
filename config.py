@@ -1,4 +1,9 @@
 ALLOWED_HOSTS = ['129.173.143.240', 'localhost', '127.0.0.1']
+CORS_ALLOWED_HOSTS = (
+    'localhost:3000',
+    '127.0.0.1:9000',
+    '129.173.143.240:5000'
+)
 
 AUTH_API = "http://access.inwk.dal.ca/api/api-token-auth/"
 TOKEN_VERIFY = "http://access.inwk.dal.ca/api/api-token-verify/"

@@ -55,13 +55,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-CORS_ORIGIN_WHITELIST = (
-    'google.com',
-    'hostname.example.com',
-    'localhost:3000',
-    '127.0.0.1:9000'
-)
-
 ROOT_URLCONF = 'backend.urls'
 
 TEMPLATES = [
@@ -156,7 +149,7 @@ REST_FRAMEWORK = {
 }
 
 ALLOWED_HOSTS = CONFIG.ALLOWED_HOSTS
-
+CORS_ORIGIN_WHITELIST = CONFIG.CORS_ALLOWED_HOSTS
 
 AUTH_API = CONFIG.AUTH_API
 TOKEN_VERIFY = CONFIG.TOKEN_VERIFY
