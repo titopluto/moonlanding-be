@@ -71,3 +71,14 @@ class PodDetail(APIView):
     #         PodDeviceModel(device = devv, pod = pod, dev_url = dev["dev_url"]).save()
     # 
     #     return self.get(request, pk)
+
+class AllPodDetail(APIView):
+    permission_classes = (IsAuthenticated,)
+    """
+       Retrieve All Pod instances.
+    """
+
+    def get(self, request, format=None):
+        pods = PodModel.objects.all()
+        serializer = PodDetailSerializer(pods, many=True)
+        return Response(serializer.data)
