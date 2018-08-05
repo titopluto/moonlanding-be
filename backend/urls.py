@@ -20,7 +20,7 @@ from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework.documentation import include_docs_urls
-from core.auth.views import TokenObtainPairView
+from core.auth.views import TokenObtainPairView, TokenVerifyView
 from core.views import Password, PasswordResetEmail, PasswordReset
 
 urlpatterns = [
@@ -34,7 +34,7 @@ urlpatterns = [
     url(r'^api/passwordreset/$', PasswordReset.as_view(), name='password_reset_operation'),
 
     #url(r'^api/token/refresh/$', TokenRefreshView.as_view(), name='token_refresh'),
-    #url(r'^api/token/verify/$', TokenVerifyView.as_view(), name='token_verify'),
+    url(r'^api/token/verify/$', TokenVerifyView.as_view(), name='token_verify'),
 
     url(r'^api/', include('moonlightapp.urls'))
 ]
