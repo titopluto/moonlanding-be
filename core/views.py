@@ -13,6 +13,7 @@ from .ResponseStatus import ResponseStatus
 from .auth.settings import api_settings
 from .EmailService import send_email
 
+
 class Password(APIView):
     permission_classes = (IsAuthenticated,)
     """
