@@ -5,3 +5,6 @@
 migrations
 config.py
 
+
+#My Virtual Enviroment folder
+venv
