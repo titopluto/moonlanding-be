@@ -5,6 +5,9 @@
 migrations
 config.py
 
+content
+
+.idea
 
 #My Virtual Enviroment folder
 venv
